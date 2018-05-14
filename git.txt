@@ -1,0 +1,32 @@
+get config --list
+打开命令窗口进入该文件夹下，键入git init命令
+
+git status //查看工作区提交状态
+git add <file>//放入暂存区
+git commit <file> -m "the first commit"//提交到版本库
+git log //历史记录 git log --pretty=oneline
+用HEAD表示当前版本
+cat readme.txt //查看文件
+git reset --hard HEAD^//版本回退git reset --hard commit_id
+git reflog//用来记录你的每一次命令
+git diff HEAD -- readme.txt//命令可以查看工作区和版本库里面最新版本的区别
+git checkout -- file可以丢弃工作区的修改
+git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区
+rm file//删除工作区文件
+一是确实要从版本库中删除该文件，那就用命令git rm删掉，并且git commit：
+git remote add origin git@github.com:tuonijiao/gittest.git//与远程库连接
+git push -u origin master
+ssh-keygen -t rsa -C "951629280@qq.com"
+https://www.cnblogs.com/xixihuang/p/5522424.html//添加SSH密钥到GitHub
+git branch//查看分支
+git branch <name>//创建分支
+git checkout <name>//切换分支
+git checkout -b <name>//创建+切换分支
+git merge <name>//合并某分支到当前分支
+git branch -d <name>//删除分支
+git log --graph命令可以看到分支合并图//git log --graph --pretty=oneline --abbrev-commit
+git merge --no-ff -m "merge with no-ff" dev//准备合并dev分支，请注意--no-ff参数，表示禁用Fast forward
+git log --graph --pretty=oneline --abbrev-commit//查看分支结构
+git remote show origin  //查看远程仓库信息
+git remote -v //查看绑定的远程库
+ssh -T git@github.com 判断是否绑定成功
