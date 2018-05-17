@@ -1,0 +1,56 @@
+jsp（java server pages)是在HTML中嵌入java代码，servlet是在java代码中嵌入HTML。
+servlet应用于java代码,jsp应用于页面显示。
+jsp脚本：
+1、<%java代码%>翻译到service方法的内部
+2、<%=java变量或表达式%>翻译成service方法内部的out.print()
+3、<%！java代码%>翻译成service的成员内容
+注释：
+<!--html注释 -->可见范围jsp源码，翻译后servlet、页面显示html源码
+<%-- jsp注释--%>可见范围jsp源码
+jsp原理：本质是servlet 访问->index.jsp->index_jsp.java响应。
+jsp指令：
+1、page指令 属性最多的指令，多个属性用空格隔开。
+	language 只能写Java，没用
+	pageEncoding 当前jsp文件页面编码，内部包含contentType
+	contentType  
+	session    默认true，是否默认自动创建session
+	import     java.util.*
+	errorPage   当当前页面出错后跳到哪个页面/error.jsp
+	isErrorPage 当前页面是处理错误的页面
+	buffer 默认8kb，可以设置成0 代表关闭out缓冲区
+使用response缓冲区
+2、include指令
+	页面包含指令（静态包含）
+	<%@ include file = "/xx.jsp"%>
+3、taglib指令
+	在jsp页面引入标签库（jstl、struts）
+	<%@ taglib uri="标签库"% prefix="前缀">
+jsp隐式（内置）九大对象    脚本--代码
+	out 输出  类型：JspWriter
+	request 
+	response 
+	config 	  
+	session 保存用户信息
+	application
+	page     实例
+	pageContext   （page域4:当前jsp页面范围）
+		jsp的页面容器 上下文对象 是一个域对象。scope范围   可以向request（3）：一次请求，session（2）：一次会话，application（1）：web应用域存数据。
+		域：setAttribute();getAttribute();
+		方法：findAttribute(String name);会从小到大搜索域的范围中的内容。
+		可以获得八大隐式对象
+		与page对象无关
+	exception  保存错误信息
+jsp标签：
+	1、页面包含（动态包含）
+	<jsp:include page="/xx.jsp"></jsp:include>
+	2、请求转发
+	<jsp:forward page="/xx.jsp"></jsp:forward>
+
+
+
+
+	
+
+
+
+
