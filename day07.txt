@@ -1,0 +1,52 @@
+字符串：
+	只要是字符串，就是一个对象
+	字符对应的类是String
+	String类不需要导包，需要使用的目标类在java.lang下
+API文档：应用程序编程规范
+字符串的构造方法(2+1)：
+	1、public String(Char[] array);参数是一个字符数组，根据字符数组的内容创建字符串。                                            
+	2、public String(Char[] array，int offset，int count);
+		参数offset代表一个数组中的起始索引
+		参数count代表取用多少字符                        	3、直接赋值
+字符串池：直接赋值的字符串地址值保存在池中，保证字符串不重复   
+	   ==在字符串中是地址值得比较                                            字符串的内容不可变
+字符串的比较方法：   
+	1、使用==是地址值的相同判断 
+	2、public boolean equals（Object obj） 
+ 		进行字符串内容比较 				使用equals方法a.equals(b)	
+		常量尽量写在前面，防止空指针异常        		3、public boolean equalsIgnoreCase（String str）                 	  不区分大小写
+字符串的替换方法：
+	public String replace(CharSquence oldStr ,CharSquence newStr)
+	b=a.replace("d"，“s”)
+字符串的切割方法：
+	public String[] split(String regex) 以regex作为标记，分成若干段在中字符串（字符串数组）
+	array=str.split (",")
+集合：     和数组类似，引用类型，保存很多个数据
+	区别数组：集合长度可以改变
+	ArrayList<E> //泛型：集合存放的全都是统一的什么类型的数据，泛型只能是引用类型，不能是基本类型。
+集合的构造方法：
+	ArrayList <泛型> list = new  ArrayList<>();
+	默认public ArrayList();无参构造方法
+集合的常用方法：
+	1、添加元素
+		public boolean add(E element);
+		向集合中添加一个元素，参数是被添加元素，返回值一定是true,其他的方法不一定为true。
+		ArrayList直接打印对象名称，不是地址值，而是内容，格式和数组一样。
+	2、获取元素
+		public E get(int index);从集合中获取一个元素，参数是元素索引，返回值是获得的元素的对象。
+	3、获取长度
+		public int size()；获取集合的元素个数，集合的长度，得到int数字。
+集合存储的基本类型：
+	集合泛型必须是引用类型，不能是基本类型
+	使用基本类型的包装类（全部在java.long下）
+	byte	Byte
+	short	Short
+	int	Integer[特殊]
+	long 	Long
+	float	Float
+	double	Double
+	char	Char
+	boolean	Boolean
+	基本类型可以和对应的包装类进行自动装箱拆箱（转化）
+集合存储自定义类型对象
+	集合可以存放任何一种引用类型
