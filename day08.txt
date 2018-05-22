@@ -1,0 +1,76 @@
+IO流：用于传输数据，读写本地文件、上传下载文件。
+	input 输入，读，从硬盘到内存
+	output输出，写，从内存到硬盘
+	数据流
+io流的分类：
+	字符输入流：读纯文本文件
+	字符输出流：写纯文本文件
+	字节输入流、字节输出流（处理任何一种文件数据）
+FileWrite类
+	导包：import java.io.FileWrite
+	创建：public FileWrite（String fileName）参数字符串就是文件路径名称
+		FileWrite fw = new FileWrite("file01.txt")
+	使用：     
+		写数据：public void write（String str）参数就是写到文件中的字符fw.write("hello,world");
+		关闭流：public void close（）；关闭释放相关资源fw.close
+FileWorld写数据覆盖写入与追加
+	public FileWrite（String fileName，boolean append）第二个参数如果是true，会追加写入。
+FileWrite写数据的换行
+	Windows中的换行符是：\r\n 两个字符 macos：\n  Linux:\n
+文本文件就是数字：
+	FileWrite 提供了重载形式的write方法，可以直接根据数字写文件
+	public void write(int ch)参数就是单个文字所对应的数字
+	ASCII码表，大表Unicode码表
+	48代表0,65代表A，97代表a
+FileWrite五种重载形式(成员方法)
+	public void write(int ch)写数字
+	public void write(String str)写字符串
+	public void write(String str,int offset,int count)字符串部分内容
+	public void write(char[] array)数组整体
+	public void write(char[] array,int offset,int count)数组部分
+fileReader
+	1、导包:import java.io.FileReader;
+	2、创建、构造方法：
+		public FileReader(String fileName)参数是文件的路径名
+		FileReader fw = new FileReader("file01.txt")
+	3、使用，成员方法：
+		读取单个字符：public int read();读取下一个字符，得到对应的ASCII或Unicode值
+		关闭释放资源：public void close();
+	-1代表没有更多字符	
+	（char）变量名称，将ascii值翻译成中文
+fileReader读取字符数组：（重载方法）
+	public int read (char[] buf)一次读取整个字符数组的数据，int代表返回值个数
+BufferedWriter的缓冲原理
+	写文件的类，字符输出流，有一个8192的char[]字符数组，当做缓冲作用。
+	public BufferedWriter(FileWriter fw)参数就是FileWriter 对象
+BufferedWriter的newLine方法
+	public void newLine();自动根据操作系统的不同，选择写入\r\n或者\r或者\n.
+Bufferedreader的缓冲原理
+	读文件的类，字符输入流，有一个8192的char[]字符数组，当做缓冲作用。 
+	1、首先创建一个普通的FileReader
+	2、将这个普通的FileReader包装成缓冲的Bufferedreader，构造方法public BufferedReader(FileReader fr)。
+Bufferedreader的readLine方法
+	可以读取一整行字符串	
+	public String readLine();返回值不包含换行符。
+方法的参数类型解析：
+	1、基本类型
+	2、数组
+	3、字符串
+	4、自定义类型
+方法的返回值类型（所有的数据类型）
+	1、基本类型
+	2、数组
+	3、字符串
+	4、自定义类型
+
+
+
+
+
+
+
+
+
+
+
+
