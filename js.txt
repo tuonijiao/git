@@ -1,0 +1,182 @@
+js的string对象
+	1、创建string对象
+		var str = "string"
+	2、方法和属性
+		属性：length：字符串的长度
+		方法：
+			1、与HTML相关的的方法
+				bold方法--加粗 
+				fontcolor();设置字符串颜色
+				fontsize();设置字体大小
+				link();将字符串显示成超链接
+				sub和sup ：下标和上标
+			2、与java相关的方法
+				concat();   连接字符串
+				charAt();   返回指定位置的字符
+				indexOf();  返回字符串位置   不存在返回-1
+				split();    切分字符串,成数组
+				replace();  替换字符串
+					传递两个参数：第一个参数是原始的参数
+				substr();   从第几位开始到第几位结束
+				substring(); 从第几位开始，到第几位结束 但不包含最后那一位
+js的Array对象
+	三种定义方式
+	1、var arr = [1,2,3];
+	2、使用内置的对象Array对象
+		var arr1 = new Array(5);//数组长度是5
+	3、	var arr2 = new Array(1,2,3);//数组中的元素是1、2、3
+	数组的属性：length 	获取数组的长度
+	方法：
+		concat();	连接数组
+		join();		使用字符分割数组
+		push();		向数组的末尾添加元素，添加数组的时候，会把数组当成一个整体的字符串添加进去，返回新的元素
+		pop();		删除最后一个元素，返回删除的那个元素
+		reverse();	颠倒数组中的元素的顺序
+js的Data对象	
+	var data = new data();
+	toLocalString();转换成当前时间
+	getFullYear();  返回当前年
+	getFullMonth(); 得到当前月	(0-11)
+	getDay();		得到当前的星期(0-6)
+	getDate();		得到当前的天
+	getHourd();		得到当前的小时
+	getMinutes();	得到当前的分钟
+	getSeconds();	得到当前的秒
+	getTime();		得到毫秒数
+		应用场景:使用毫秒数解决缓存问题
+js的math对象
+		里面都是静态方法，使用可以直接使用math.方法();
+		ceil();		向上舍入
+		floor();	向下舍入
+		round();	四舍五入
+		random();	得到随机数(0.0-1.0)
+js全局函数	
+		由于不属于任何一个对象，直接写名称使用
+		eval();  		执行js代码
+		encodeURI();  	对字符进行编码
+		decodeURL();	对字符进行解码
+		isNaN();		判断当前字符串是否是数字，返回true和false
+				如果是数字返回false，不是数字返回true
+js函数的重载
+			调用最后一个方法
+			把传递的参数保存到数组里面arguemets
+js的bom对象
+		broswer object model：浏览器对象模型
+		navigator对象:	获取客户机浏览器的信息
+			navigator.appName
+		screen对象：	获取屏幕的信息
+			screen.width
+			screen.height
+		location对象：	请求的URL地址
+			1、获取请求的url地址 location.href
+			2、设置url地址
+						鼠标点击事件 onclick="JS方法"
+		history对象：	
+			请求url的历史记录
+			history.back();到上一个页面		history.go(-1);
+			history.forward();到下一个页面	history.go(1);
+		window对象
+			是js的顶层对象(所有的bom对象都是在window里面操作的)
+			方法：
+				window.alert();	页面弹出一个框，显示内容
+				window.confirm("显示的内容");	确认框，返回值是true和false
+				window.prompt(text，defaul);	输入对话框
+				window.open(url地址,null,width,height);	打开新窗口
+				window.close();关闭窗口
+				做定时器
+					setInterval("js代码",毫秒数)	循环执行
+					setTimeout("js代码",毫秒数)		在毫秒数之后执行，只执行一次
+					clearInterval(id);		清除setInterval计时器					
+					clearTimeout(id);		清除setTimeout计时器
+js的dom对象
+		dom：document object model 文档对象模型
+		文档：
+			超文本文档html、xml
+		对象：
+			提供属性和方法
+		模型：
+			使用属性和方法操作超文本标记型文档
+		1、首先需要把HTML中的标签、属性、文本内容都封装成对象
+		2、解析html：根据html的层级结构，在内存中分配一个树形结构，把html的标签，属性和文档都封装城对象
+			document对象：整个文档
+			element标签对象
+			属性对象
+			文本对象
+			node节点对象
+				是这些对象的父对象
+DHTML：很多技术的简称
+	包括：	html：封装数据
+			css:  使用属性和属性值设置样式
+			dom： 操作html文档（标记型文档）
+			javascript： 专门指的是js语法语句（ECMAscript）
+document对象：
+		表示整个文档
+		常用方法：
+			-write();
+				1、向页面输出变量值
+				2、向页面输出HTML代码
+			-getElementByid();
+				返回的是对象
+			-getElementByName
+				通过标签name的属相值得到标签，返回的是对象集合
+			-getElementByTagName("标签名称")；
+				返回带指定标签的对象的集合
+element对象：
+		获取属性里面的值
+			getAttribute();
+		设置属性的值
+			setAttribute(name,value);
+		删除属性
+			removeAttribute(name);
+Node对象属性
+		nodeName
+		nodeType
+		nodeValue
+操作dom树：
+		添加子节点
+innerHTML属性：
+		1、获取文本内容
+		2、添加内容
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
