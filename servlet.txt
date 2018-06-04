@@ -1,0 +1,72 @@
+servlet、Filter、Listener三大组件
+servlet简介
+	Servlet是在服务器上运行的小程序。一个Servlet就是一个Java类，并且可以通过“请求-响应”编程模型来访问的这个驻留在服务器内存里的Servlet程序。
+	Servlet是用来处理客户端请求的动态资源，也就是当我们在浏览器中键入一个地址回车跳转后，请求就会被发送到对应的Servlet上进行处理。
+任务：
+	接收请求数据：我们都知道客户端请求会被封装成HttpServletRequest对象，里面包含了请求头、参数等各种信息。
+	处理请求：通常我们会在service、doPost或者doGet方法进行接收参数，并且调用业务层（service）的方法来处理请求。
+	完成响应：处理完请求后，我们一般会转发（forward）或者重定向（redirect）到某个页面，转发是HttpServletRequest中的方法，重定向是HttpServletResponse中的方法，两者是有很大区别的。
+实现servlet方式	
+	1 实现Servlet接口，然后实现接口中的五个方法
+	2 继承GenericServlet，只需要实现一个方法：service
+	3 继承HttpServlet,复写doGet和doPost方法
+生命周期方法：
+	1、destory();在Servlet销毁之前调用，并且只会调用一次
+	2、init();在servlet对象创建之后马上执行，并且只执行一次
+	3、getServlletConfig();获取servlet的配置信息
+	4、getServletInfo();获取servlet信息
+	5、service();每次请求都会调用，多次调用
+web.xml的servlet配置信息
+	<servlet>
+		<servlet-name>xxx</servlet-name>
+		<servlet-class>包名</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>xxx</servlet-name>
+		<url-pattern>路径</url-pattern>
+	</servlet-mapping>
+servlet是单例，每一个类只有一个对象	，同时间处理多个请求，线程不安全。
+servlet类由我们来写，对象由服务器(tomcat)来创建，并且服务器来调用相应的方法。
+ServletConfig
+		一个ServletConfig对象，对应一段web.xml的servlet配置信息
+HttpServlet	
+	继承HttpServlet，重写doGet()、doPost()方法
+	get是从服务器上获取数据，post是向服务器传送数据。
+启动时创建servlet
+		<load-on-startup>0</load-on-startup>//给出一个非负整数
+一个servlet可以有多个访问路径	--过滤器
+访问jsp时是jspServlet处理的，将动态资源转化为静态资源然后response客户端
+servlet与反射	
+	这种动态获取的信息以及动态调用对象的方法的功能称为java语言的反射机制。
+ServletContext	
+	一个项目中只有一个ServletContext
+	使用它可以给多个servlet传递数据！
+	web应用的动态资源之间的共享数据
+域对象的功能
+	PageContext
+	ServletRequest
+	HttpSession
+	ServletContext
+		setAttribute	存对象
+		getAttribute	取对象
+ServletContext获取初始化参数	
+	servlet只能获取自己的初始化参数。
+	可以配置公共的初始化参数，通过ServletContext获取
+	<context-param></context-param>
+	<context-value></context-value>
+request、resoponse
+	request是请求,在浏览器输入地址,回车,就是一个请求
+	response是响应,服务器根据请求,返回数据到浏览器显示,就是一个响应
+cookie：服务器保存到客户端的，再次访问是会归还给服务器。	
+	用途：
+		服务器使用cookie来跟踪客户端状态！
+cookie的maxage		最大生命
+HttpSession	：								
+		是javaweb提供，用来会话跟踪，session保存在服务器，是服务器端对象。
+会话：对话、会晤
+		
+	
+	
+	
+	
+	
