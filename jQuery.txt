@@ -1,0 +1,90 @@
+引入jquery文件
+	<script src="jquery-1.12.4.js"></script>
+入口函数(两种)
+	$(document).ready(function()){
+	console.log();
+	}
+	$(function()){
+	console.log();
+	}
+功能实现
+	注册事件
+	隐式迭代
+什么是jquery：
+	js库，js文件：里面有很多方法
+	jQuery是一个快速、小型、功能丰富的JavaScript库。
+	它使HTML文档遍历和操作、事件处理、动画和Ajax等变得更为简单，
+	使用易于使用的API，可以跨多个浏览器工作。由于通用性和可扩展性的结合，
+	jQuery已经改变了数百万人编写JavaScript的方式。
+jquery对象：
+	使用jquery方式获取到元素就是jquery
+	var $li = $("li");
+jquery对象与js对象的区别：
+	dom对象是用js的方法获取页面中的元素返回的对象
+	jquery对象是用jq的方法获取页面中的元素返回的对象
+	jq是js对象的一个集合，伪数组，里面存放了很多js对象
+	直接调用方法
+	不能互相调用，是两个对象
+	将dom对象转化成为jquery对象加上$
+	将jquery对象转化为dom对象，取出内部元素
+$的实质：
+		$=jQuery 
+		$是一个函数，$();
+		参数不同，功能不同
+		1、参数是function,是入口函数
+		$(function(){
+		});
+		2、把dom对象转化成为jquery对象
+		$(document).ready(function()){
+		console.log();
+		}
+		3、参数是一个字符串，用来找对象
+		$("div");
+jquery基本选择器
+		提供一组方法，用来找对象
+		设置样式：
+			css(name,value)
+		name:样式名，value:样式值
+		id、类、标签、交集、并集
+		层级选择器
+			后代选择器$("s1 s2")
+			子代选择器$("s1>s2")
+mouseover与mouseenter区别:
+		mouseover：鼠标经过事件		
+		mouseenter：鼠标进入事件--只触发一次
+jquery过滤选择器	
+		冒号打头
+		:eq指定下标、:odd奇数、:even偶数
+		$("li:even").css(name,value);//下标为偶数过滤
+jq调错技巧：
+		找jq对象是否获取
+index方法详解：			
+		index是方法函数
+			返回当前元素在所有元素里面的索引
+表单对象属性选择器：
+	enabled
+筛选选择器(方法)：
+	children()	子类选择器
+	siblings()	找到其兄弟节点，不包括自己	
+	find()	找到后代
+	next()	下一个兄弟
+	prev()	上一个兄弟
+	opacity透明度
+链式编程：
+	在jquery里面，方法可以一直调用下去
+jquery中变量值在字符串中引用的方式 :
+	$("span[id="+value+"]");
+
+
+
+
+
+
+
+			
+	
+	
+	
+	
+	
+	
