@@ -1,0 +1,201 @@
+监听器
+	Listener是Servlet的监听器，可以监听客户端的请求，服务端的操作等
+	它是一个接口，内容由我们来实现
+	它需要注册，例如注册到按钮上
+	监听器中的方法，会在特殊事件发生时被调用
+javaweb中的监听器
+	事件源：三大域
+	ServletContext
+		生死监听：ServletContextListener 它有两个方法，一个在出生时调用，一个在死亡是调用
+		属性监听：ServletContextAttributeListener 它有三个方法，一个在添加属性时调用，一个在替换属性时调用，最后一个在移除属性时调用。
+	HttpSession
+		生死监听：HttpSessionListener 它有两个方法，一个在出生时调用，一个在死亡是调用
+		属性监听：HttpSessionAttributeListener 它有三个方法，一个在添加属性时调用，一个在替换属性时调用，最后一个在移除属性时调用。
+	ServletRequest
+		生死监听：ServletRequestListener 它有两个方法，一个在出生时调用，一个在死亡是调用
+		属性监听：ServletRequestAttributeListener 它有三个方法，一个在添加属性时调用，一个在替换属性时调用，最后一个在移除属性时调用。
+javaWeb中完成编写监听器
+	写一个监听器类，要求必须去实现某个监听器接口；
+	注册，是在web.xml中配置来完成注册！
+web.xml中的配置
+<listener>
+	<listener-class></listener-class>
+</listener>
+事件对象：
+		ServletContextEvent：ServletContext getServletContext();
+		HttpSessionEvent：	HttpSession getSession	
+		ServletRequest：	
+				ServletContext getServletContext();
+				ServletRequest getServletRequest();
+SessionBindingListener
+		不需要配置
+		感知监听器，添加到javabean上，javabean就自己知道是否添加到session。
+		a. 执行session.setAttribute("uocl", 非uocl对象) 时。
+		b. 执行session.removeAttribute("uocl") 时。
+		c. 执行session.invalidate()时。
+		d. session超时后。
+HttpSessionActivationListener
+session的序列化
+	    1. 容器关闭后session并没有消失，而是被持久化到了硬盘里；
+
+		2. 如果项目中的POJO实现了Serializable接口，那么会跟着session一起被持久化到硬盘，在反序列化的时候会成功还原；
+
+		3. 要想服务器重启后，还是原来的session，还继续紧接着原来的页面操作的话，就需要实例化项目中的POJO。
+session的钝化和活化
+		活化(从硬盘到内存)和钝化(从内存到硬盘)的过程
+国际化
+		把语言相关的字符串写成变量
+		写两个配置文件，一个放中文信息，一个放英文信息
+		什么语言环境：locale类
+		在JavaAPI中提供了一个ResourceBundle 类用于描述一个资源包;
+		并且 ResourceBundle类提供了相应的方法getBundle;
+		这个方法可以根据来访者的国家地区自动获取与之对应的资源文件予以显示。	
+test()方法里面写你需要测试的方法
+		---TestMethods这个类不用new，就可以运行。
+		是因为它是通过org.junit.Test中的API中的类反射生成的，
+		然后调用用@Test注解的方法，有几个@Test注解，就运行几个test方法。
+过滤器Filter：
+		单例
+		拦截请求
+		对web服务器管理的所有web资源：例如Jsp, Servlet, 静态图片文件或静态 html 文件等进行拦截，从而实现一些特殊的功能。
+		例如实现URL级别的权限访问控制、过滤敏感词汇、压缩响应信息等一些高级功能。
+		Filter开发分为二个步骤：
+		1、编写java类实现Filter接口，并实现其doFilter方法。
+		2、在 web.xml 文件中使用<filter>和<filter-mapping>元素对编写的filter类进行注册，并设置它所能拦截的资源。
+			void init(FilterConfig)
+				初始化
+			void destory()
+				销毁之前执行
+			void doFilter(ServletRequest,ServletResponse,FilterChain)
+				每次过滤都会执行
+		配置：
+				 <!--配置过滤器-->
+	<filter>
+		<filter-name>xxx</filter-name>
+		<filter-class>Filter类路径</filter-class>
+	</filter>
+
+	<!--映射过滤器-->
+	<filter-mapping>
+		<filter-name>FilterDemo01</filter-name>
+	<!--“/*”表示拦截所有的请求 -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+FilterConfig->与ServletConfig相似		
+		获取初始化参数：getInitParameter()
+		获取过滤器名称:	getFilterName()
+		获取appliation	getServletContext()
+FilterChain
+		doFilter(ServletRequest,ServletResponse);放行
+		调用了目标Servlet的service()方法。
+在web项目中，当用户在浏览器中输入的URL不包含某个特定的Servlet、html、jsp页面时，web.xml中<welcome-file-list>标签元素就会指定显示的默认文件。
+多个过滤器的执行顺序
+		在一个web应用中，可以开发编写多个Filter，这些Filter组合起来称之为一个Filter链。
+　　	web服务器根据Filter在web.xml文件中的注册顺序，决定先调用哪个Filter，当第一个Filter的doFilter方法被调用时，
+		web服务器会创建一个代表Filter链的FilterChain对象传递给该方法。在doFilter方法中，开发人员如果调用了FilterChain对象的doFilter方法，
+		则web服务器会检查FilterChain对象中是否还有filter，如果有，则调用第2个filter，如果没有，则调用目标资源。
+四种拦截方式
+		请求
+		转发
+		包含
+		错误
+<filter-mapping>
+<filter-name>testFilter</filter-name>
+<url-pattern>/index.jsp</url-pattern>
+<dispatcher>REQUEST</dispatcher>
+<dispatcher>FORWARD</dispatcher>
+</filter-mapping>
+多过滤器的执行若是执行目标资源，如果没有下一个过滤器那么就执行目标资源，如果有，那就执行过滤器。
+文件上传：
+		1、上传对表单的限制
+			method="post"
+			enctype="multipart/form-data"	多部件的表单项
+			表单中需要添加文件表单项：<input type="file" name=""/>
+		2、上传对servlet限制
+		request.getParametere("xxx")
+		ServletInputStream request.getInputStream("xx")包含整个请求的体
+上传三步：
+		1、得到工厂
+		2、通过工厂创建解析器
+		3、解析request，得到FileItem集合
+		4、遍历FileItem集合，通过api完成文件的保存。
+ajax
+	异步的js和xml		
+异步交互：发送一个请求，不需要等待服务器响应，然后就可以发送第二个请求
+		可以使用js接收服务器的响应，然后使用js局部刷新
+同步交互：发送一个请求，等待服务器的请求，然后才能发第二个请求		
+		刷新的是整个页面
+应用场景：
+	百度的搜索框
+	用户注册时（校验用户名是否被注册过）
+ajax
+	优点：
+		1、最大的一点是页面无刷新，在页面内与服务器通信，给用户的体验非常好。
+　 		2、使用异步方式与服务器通信，不需要打断用户的操作，具有更加迅速的响应能力。
+　 		3、可以把以前一些服务器负担的工作转嫁到客户端，利用客户端闲置的能力来处理，减轻服务器和带宽的负担，节约空间和宽带租用成本。并且减轻服务器的负担，ajax的原则是“按需取数据”，可以最大程度的减少冗余请求，和响应对服务器造成的负担。
+		4、基于标准化的并被广泛支持的技术，不需要下载插件或者小程序。
+发送异步请求（四步操作）
+		第一步(得到XMLHttpRequest)
+			var xmlHttp = new XMLHttpRequest();
+			-编写创建XMLHttpRequest对象的函数
+		第二步（打开与服务器的连接）
+			xmlHttp.open();用来打开与服务器的连接，需要三个参数
+			-请求方式
+			-请求的url
+			-请求是否为异步asyn
+			xmlHttp.open ("GET","day/AServlet","true");
+		第三步（发送请求）
+			xmlHttp.send(null);
+			-参数就是请求体内容
+		第四步
+		-在xmlHttp对象的一个事件上注册监听器：onreadystatechange
+		xmlHttp对象的一共有5个状态
+		得到xmlHttp对象的状态
+		var state = xmlHttp.readyState;
+		得到服务器响应内容
+		var content = xmlHttp.responseText;得到服务器的响应的文本格式的内容
+		var content = xmlHttp.responsexml;	得到服务器的响应的xml内容，它是document对象
+		
+json ----JavaScript Object Notation(JavaScript 对象表示法)
+	1、js提供的一种数据交互格式
+	2、json语法
+		{}；是对象json
+		-属性名必须使用双引号括起来！
+		-属性值：null
+				数值
+				字符串
+				数组
+				boolean
+	3、应用json
+		var haha = {"name":"zhangsan","age"=18}
+		alert(haha.name+","+haha.age);
+		
+	response.getWritter.print(str)	
+	4、json与xml
+		可读性：xml胜出
+		解析难度：json就是js对象
+		流行性：在AJAX中，JSON更受欢迎
+JavaScript 函数 eval() 可用于将 JSON 文本转换为 JavaScript 对象。
+JSON 是JS对象的字符串表示法，它使用文本表示一个JS对象的信息，本质是一个字符串。
+var obj = eval ("(" + txt + ")"); 
+json-lib
+	可以把Javabean转化成json串
+	JSONObject--->Map
+	JSONArray--->list
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	
