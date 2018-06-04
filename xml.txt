@@ -1,0 +1,165 @@
+表单提交事件
+		使用submit提交
+		<from>
+			<input type="submit">
+		</from>
+		使用button提交表单
+			-代码
+			function form1(){
+				//获取form
+				var form1 = document.getElementById("form1");
+				form1.action = "hello.html";
+				form1.submit;
+			}
+		使用超链接提交
+xml的简介
+	可扩展标记型语言
+	标签可以自己定义，可以写中文标签
+	用途：
+		宗旨是传输数据，不是显示数据
+	是w3c组织发布的
+	两个版本1.0 1.1
+xml的应用
+	不同系统之间传输数据
+	用来表示生活中有关系的数据
+	经常用在配置文件
+xml的语法
+	1、xml的文档说明
+			<?xml version="1.0" encoding="gbk"?>
+			第一行第一列
+			属性
+				-version：版本
+				-encoding：编码
+				-standalone：说明文档是否独立	
+			xml中文乱码问题
+				保存编码与设置打开的编码一致
+	2、定义元素
+			标签定义
+				标签有开始必须有结束<a></a>
+				标签没有内容，可以才标签内结束<aa/>
+				只有一个根标签
+				空格和换行都当成内容来解析
+			标签中的名称规范
+				区分大小写
+				不能以数字和下划线开头
+				不包含空格和冒号
+	3、定义属性
+			一个标签上可以有多个属性
+			属性名称不能相同
+			属性名称与属性值之间用=，属性值使用引号（可以使单引号，也可以是双引号）
+			属性名称规范与元素名称规范一样
+	4、注释
+			<--注释-->
+			注释不能有嵌套
+	5、特殊字符
+			转义字符
+			<	&lt;
+			>	&gt;
+			"	&quot;
+			'	&apos;
+			&	&amp;
+	6、CDATA区
+	7、PI指令
+xml约束
+		dtd的约束
+		schema约束
+dtd快速入门	
+     xml中引入约束	
+	<!DOCTYPE 元素名称 SYSTEM "xx.dtd">
+	浏览器只负责校验语法，不负责校验约束
+dtd的三种引用方式
+		1、引入外部的dtd文件
+			<!DOCTYPE 元素名称 SYSTEM "xx.dtd">
+		2、使用内部的dtd
+		3、使用（外部）网络上的dtd文件
+			<!DOCTYPE 根元素名称 SYSTEM "DTD名称" "DTD文档的URL">
+使用dtd定义元素
+		语法：<!element 元素名 约束>
+		简单元素：没有子元素
+				<!ELEMRNT name (#PCDATA)>
+				(#PCDATA):约束name是字符串类型
+				EMPTY	元素为空
+				ANY		任意
+		复杂元素：有子元素
+				用括号包起来
+				<!ELEMRNT name (子元素)>
+				表示子元素出现次数：
+				+:表示一次或多次
+				?:表示0次或1次
+				*:表示0次或多次
+				子元素用逗号,隔开，按顺序
+				子元素用|隔开;表示只能用一个
+使用dtd定义属性
+		<!ATTLIST> 元素名称
+				属性名称 属性类型 属性约束(#REQUIRED)
+		>
+		属性类型
+			-CDATA：字符串
+			-枚举：表示只能在一定的范围内出现值，但是只能每次出现其中的一个(aa||bb||cc)
+			-ID:只能是字母或者下划线开头
+		属性约束：
+			#REQUIRED	表示该属性必须出现
+			#IMPLIED   	表示属性可有可无
+			#FIXED "xx"	表示属性必须是设置的固定值
+			直接值		表示属性取值为该默认值
+定义引用实体
+		概念:在DTD中定义，在xml中使用
+		语法：
+			<!ENTIYT 实体名称 "实体内容">
+		引用方式：&实体名称;
+		-定义实体需要写在内部的dtd中
+xml的解析的简介****
+		 使用dom方式解析xml，如果文件过大，容易造成溢出。优点：方便实现增删改
+		 使用sax方式解析：采用事件驱动，边读边解析。优点：不会内存溢出。缺点：不能增删改
+sun公司：针对dom和sax解析器 jaxp
+dom4j：	 针对dom和sax解析器 dom4j
+jdom：   针对dom和sax解析器 jdom		 
+
+jaxp的api的查看
+		jaxp 是javase的一部分
+使用jaxp实现解析查询
+		1、创建解析器工厂
+		2、根据解析器工厂创建解析
+		3、解析xml返回document
+		4、得到所有元素
+		5、返回集合，遍历结合，得到每一个name元素
+xml的Schema约束	
+	1、 XML Schema文件自身就是一个XML文件，但它的扩展名通常为.xsd。 
+	2、一个XML Schema文档通常称之为模式文档（约束文档），遵循这个文档写的xml文件称之为实例文档。 
+	3、 和XML文件一样，一个XML Schema文档也必须有一个根节点，但这个根节点的名称为Schema。 
+	4、 编写了一个XML Schema约束文档后，通常需要把这个文件中的声明的元素绑定到一个URI地址上，
+	在XML Schema技术中有一个专业属于来描述这个过程，即把XML Schema文档声明的元素绑定到一个名称空间上，
+	以后XML文件姐可以通过这个URI（即名称空间）来告诉解析引擎，xml文档中编写的元素来自那里，被谁约束。
+属性
+		xmlns
+		targetNamespac
+		elementFormDefault
+步骤	
+		1、看xml中有多少个元素
+		2、看简单元素与复杂元素
+			复杂元素：有子元素
+				<complexType>
+					<sequence>
+						子元素
+					</sequence>
+				</complexType>
+			简单元素：写在复杂元素里面
+		3、引入约束文件
+			xmlns:xsi(别名)="xxx-instance"//表示xml是被约束的文件
+			xmlns="targetNamespac"//引入约束文件使用地址
+			xsi:schemLocation="targetNamespac 约束文档路径"
+使用dom4j解析xml
+		dom4j不是javase的一部分
+		需要导包 
+实现查询操作
+		创建解析器
+		得到document
+		再得到根节点
+		得到标签
+		遍历list
+		得到元素
+		
+		
+		
+	
+	
